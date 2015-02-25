@@ -5,5 +5,6 @@ Serilog combines the best features of traditional and structured diagnostic logg
 
 * [Serilog Homepage](http://serilog.net)
 * [Serilog Documentation](https://github.com/serilog/serilog/wiki)
+* [Serilog Metrics Documentation](https://github.com/serilog-metrics/serilog-metrics/wiki)
 
 Copyright &copy; 2015 Serilog Contributors - Provided under the [Apache License, Version 2.0](http://apache.org/licenses/LICENSE-2.0.html).
