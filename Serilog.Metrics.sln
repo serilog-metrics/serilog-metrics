@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5A23229C-5FD9-4483-ABC3-AE3A02E6B677}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Metrics", "src\Serilog.Metrics\Serilog.Metrics.csproj", "{264C91AF-6631-4E04-A2AC-E32E88055228}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{70C58A7D-60CC-4896-96E2-D088E30AA584}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Metrics.Tests", "test\Serilog.Metrics.Tests\Serilog.Metrics.Tests.csproj", "{2BC62583-75E2-4A1B-B4DA-54F1FEDAE846}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{264C91AF-6631-4E04-A2AC-E32E88055228}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{264C91AF-6631-4E04-A2AC-E32E88055228}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{264C91AF-6631-4E04-A2AC-E32E88055228}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{264C91AF-6631-4E04-A2AC-E32E88055228}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BC62583-75E2-4A1B-B4DA-54F1FEDAE846}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BC62583-75E2-4A1B-B4DA-54F1FEDAE846}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BC62583-75E2-4A1B-B4DA-54F1FEDAE846}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BC62583-75E2-4A1B-B4DA-54F1FEDAE846}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{264C91AF-6631-4E04-A2AC-E32E88055228} = {5A23229C-5FD9-4483-ABC3-AE3A02E6B677}
+		{2BC62583-75E2-4A1B-B4DA-54F1FEDAE846} = {70C58A7D-60CC-4896-96E2-D088E30AA584}
+	EndGlobalSection
+EndGlobal
