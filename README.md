@@ -7,4 +7,29 @@ Serilog combines the best features of traditional and structured diagnostic logg
 * [Serilog Documentation](https://github.com/serilog/serilog/wiki)
 * [Serilog Metrics Documentation](https://github.com/serilog-metrics/serilog-metrics/wiki)
 
+## Get started
+To quickly get started, add the SerilogMetrics package to your solution using the NuGet Package manager or run the following command in the Package Console Window:
+
+```powershell
+Install-Package SerilogMetrics
+```
+
+The metrics method extensions are extending the ILogger interface of Serilog. So just reference the Serilog namespace and you can invoke the functionality from the logger.
+
+For example;
+
+```csharp
+var logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Trace()
+                .CreateLogger();
+
+using (logger.BeginTimedOperation("Time a thread sleep for 2 seconds."))
+{
+     Thread.Sleep(2000);
+}
+```
+
+See the [documentation](https://github.com/serilog-metrics/serilog-metrics/wiki) for more details.
+
 Copyright &copy; 2015 Serilog Contributors - Provided under the [Apache License, Version 2.0](http://apache.org/licenses/LICENSE-2.0.html).
