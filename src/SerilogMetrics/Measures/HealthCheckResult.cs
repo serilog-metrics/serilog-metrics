@@ -12,9 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using System;
-using Serilog.Events;
 
-namespace Serilog.Metrics
+namespace SerilogMetrics
 {
 
 	/// <summary>
@@ -22,7 +21,7 @@ namespace Serilog.Metrics
 	public class HealthCheckResult{
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Serilog.Metrics.HealthCheckResult"/> class.
+		/// Initializes a new instance of the <see cref="SerilogMetrics.HealthCheckResult"/> class.
 		/// </summary>
 		public HealthCheckResult ()
 		{
@@ -31,7 +30,7 @@ namespace Serilog.Metrics
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Serilog.Metrics.HealthCheckResult"/> class.
+		/// Initializes a new instance of the <see cref="SerilogMetrics.HealthCheckResult"/> class.
 		/// </summary>
 		/// <param name="isHealthy">If set to <c>true</c> is healthy.</param>
 		/// <param name="message">Message.</param>
@@ -44,7 +43,7 @@ namespace Serilog.Metrics
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Serilog.Metrics.HealthCheckResult"/> class.
+		/// Initializes a new instance of the <see cref="SerilogMetrics.HealthCheckResult"/> class.
 		/// </summary>
 		/// <param name="message">Message.</param>
 		public HealthCheckResult (string message)
@@ -54,7 +53,7 @@ namespace Serilog.Metrics
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Serilog.Metrics.HealthCheckResult"/> class.
+		/// Initializes a new instance of the <see cref="SerilogMetrics.HealthCheckResult"/> class.
 		/// </summary>
 		/// <param name="message">Message.</param>
 		/// <param name="exception">Exception.</param>

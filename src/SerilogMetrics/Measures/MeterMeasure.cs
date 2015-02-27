@@ -14,10 +14,11 @@
 
 using System;
 using Serilog.Events;
+using Serilog;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Serilog.Metrics
+namespace SerilogMetrics
 {
 	/// <summary>
 	/// Meter measure.
@@ -42,7 +43,7 @@ namespace Serilog.Metrics
 		private readonly long _startTime = DateTime.Now.Ticks;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Serilog.Metrics.MeterMeasure"/> class.
+		/// Initializes a new instance of the <see cref="SerilogMetrics.MeterMeasure"/> class.
 		/// </summary>
 		/// <param name="logger">Logger.</param>
 		/// <param name="name">Name.</param>
@@ -90,13 +91,13 @@ namespace Serilog.Metrics
 		}
 
 		/// <summary>
-		/// Releases all resource used by the <see cref="Serilog.Metrics.MeterMeasure"/> object.
+		/// Releases all resource used by the <see cref="SerilogMetrics.MeterMeasure"/> object.
 		/// </summary>
-		/// <remarks>Call <see cref="Dispose"/> when you are finished using the <see cref="Serilog.Metrics.MeterMeasure"/>. The
-		/// <see cref="Dispose"/> method leaves the <see cref="Serilog.Metrics.MeterMeasure"/> in an unusable state.
+		/// <remarks>Call <see cref="Dispose"/> when you are finished using the <see cref="SerilogMetrics.MeterMeasure"/>. The
+		/// <see cref="Dispose"/> method leaves the <see cref="SerilogMetrics.MeterMeasure"/> in an unusable state.
 		/// After calling <see cref="Dispose"/>, you must release all references to the
-		/// <see cref="Serilog.Metrics.MeterMeasure"/> so the garbage collector can reclaim the memory that the
-		/// <see cref="Serilog.Metrics.MeterMeasure"/> was occupying.</remarks>
+		/// <see cref="SerilogMetrics.MeterMeasure"/> so the garbage collector can reclaim the memory that the
+		/// <see cref="SerilogMetrics.MeterMeasure"/> was occupying.</remarks>
 		public void Dispose()
 		{
 			_cancellationToken.Cancel();

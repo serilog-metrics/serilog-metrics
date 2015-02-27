@@ -15,9 +15,11 @@
 using NUnit.Framework;
 using System;
 using Serilog.Events;
+using Serilog;
 using System.Reactive.Linq;
 
-namespace Serilog.Metrics.Tests
+
+namespace SerilogMetrics.Tests
 {
 
 

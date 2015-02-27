@@ -5,8 +5,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2BC62583-75E2-4A1B-B4DA-54F1FEDAE846}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Serilog.Extras.Timing.Tests</RootNamespace>
-    <AssemblyName>Serilog.Extras.Timing.Tests</AssemblyName>
+    <RootNamespace>SerilogMetrics.Tests</RootNamespace>
+    <AssemblyName>SerilogMetrics.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -63,9 +63,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Serilog.Metrics\Serilog.Metrics.csproj">
+    <ProjectReference Include="..\..\src\SerilogMetrics\SerilogMetrics.csproj">
       <Project>{264C91AF-6631-4E04-A2AC-E32E88055228}</Project>
-      <Name>Serilog.Metrics</Name>
+      <Name>SerilogMetrics</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

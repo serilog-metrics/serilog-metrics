@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5A23229C-5FD9-4483-ABC3-AE3A02E6B677}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Metrics", "src\Serilog.Metrics\Serilog.Metrics.csproj", "{264C91AF-6631-4E04-A2AC-E32E88055228}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerilogMetrics", "src\SerilogMetrics\SerilogMetrics.csproj", "{264C91AF-6631-4E04-A2AC-E32E88055228}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{70C58A7D-60CC-4896-96E2-D088E30AA584}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serilog.Metrics.Tests", "test\Serilog.Metrics.Tests\Serilog.Metrics.Tests.csproj", "{2BC62583-75E2-4A1B-B4DA-54F1FEDAE846}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerilogMetrics.Tests", "test\SerilogMetrics.Tests\SerilogMetrics.Tests.csproj", "{2BC62583-75E2-4A1B-B4DA-54F1FEDAE846}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

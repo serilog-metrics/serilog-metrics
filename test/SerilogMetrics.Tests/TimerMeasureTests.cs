@@ -17,8 +17,9 @@ using System;
 using Serilog.Events;
 using System.Reactive.Linq;
 using Serilog.Context;
+using Serilog;
 
-namespace Serilog.Metrics.Tests
+namespace SerilogMetrics.Tests
 {
 
 

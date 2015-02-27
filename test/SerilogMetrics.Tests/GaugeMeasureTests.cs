@@ -18,8 +18,9 @@ using Serilog.Events;
 using System.Reactive.Linq;
 using Serilog.Context;
 using System.Collections.Generic;
+using Serilog;
 
-namespace Serilog.Metrics.Tests
+namespace SerilogMetrics.Tests
 {
 
 	[TestFixture ()]

@@ -13,8 +13,9 @@
 // limitations under the License.
 using System;
 using Serilog.Events;
+using Serilog;
 
-namespace Serilog.Metrics
+namespace SerilogMetrics
 {
 	/// <summary>
 	/// Health measure.
@@ -30,7 +31,7 @@ namespace Serilog.Metrics
 		readonly string _template;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Serilog.Metrics.HealthMeasure"/> class.
+		/// Initializes a new instance of the <see cref="SerilogMetrics.HealthMeasure"/> class.
 		/// </summary>
 		/// <param name="logger">Logger.</param>
 		/// <param name="name">Name.</param>

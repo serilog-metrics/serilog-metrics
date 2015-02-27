@@ -14,8 +14,9 @@
 
 using System;
 using Serilog.Events;
+using Serilog;
 
-namespace Serilog.Metrics
+namespace SerilogMetrics
 {
 	/// <summary>
 	/// Gauge measure.

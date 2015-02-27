@@ -31,7 +31,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Serilog.Metrics
+namespace SerilogMetrics
 {
     using System.Threading;
 

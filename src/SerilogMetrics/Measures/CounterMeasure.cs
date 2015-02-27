@@ -13,8 +13,9 @@
 // limitations under the License.
 
 using Serilog.Events;
+using Serilog;
 
-namespace Serilog.Metrics
+namespace SerilogMetrics
 {
 	/// <summary>
 	/// Counter measure.

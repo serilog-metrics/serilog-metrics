@@ -12,16 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Serilog.Metrics
+namespace SerilogMetrics
 {
     /// <summary>
-    /// Common measure interface.
+    /// Measures an operation.
     /// </summary>
-    public interface IMeasure
+    public interface IGaugeMeasure : IMeasure
     {
-        /// <summary>
-        /// Write the measurement data to the log system.
-        /// </summary>
-        void Write();
+        
     }
+
 }

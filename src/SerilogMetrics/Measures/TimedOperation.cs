@@ -16,8 +16,9 @@ using System;
 using System.Linq;
 using System.Diagnostics;
 using Serilog.Events;
+using Serilog;
 
-namespace Serilog.Metrics
+namespace SerilogMetrics
 {
 	/// <summary>
 	/// Timed operation.

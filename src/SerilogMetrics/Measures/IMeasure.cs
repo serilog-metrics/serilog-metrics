@@ -12,32 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Serilog.Metrics
+namespace SerilogMetrics
 {
     /// <summary>
-    /// Provides a counter which allow increments and decrements. 
+    /// Common measure interface.
     /// </summary>
-    public interface ICounterMeasure  : IMeasure
+    public interface IMeasure
     {
         /// <summary>
-        /// Increments the counter.
+        /// Write the measurement data to the log system.
         /// </summary>
-        void Increment();
-
-        /// <summary>
-        /// Decrements the counter.
-        /// </summary>
-        void Decrement();
-
-        /// <summary>
-        /// Resets the counter back to zero.
-        /// </summary>
-        void Reset();
-
-		/// <summary>
-		/// Retrieves the current value.
-		/// </summary>
-		long Value ();
+        void Write();
     }
-
 }
