@@ -1,4 +1,4 @@
-SerilogMetrics
+SerilogMetrics [![Build status](https://ci.appveyor.com/api/projects/status/ou1ofq2vvc0gd0jo?svg=true)](https://ci.appveyor.com/project/mivano/serilog-metrics)
 =================================================================================================================================================
 
 Serilog combines the best features of traditional and structured diagnostic logging in an easy-to-use package and Serilog.Metrics extends this logging framework with measure capabilities like counters, timers, meters and gauges.
