@@ -1,4 +1,4 @@
-Serilog.Metrics
+SerilogMetrics
 =================================================================================================================================================
 
 Serilog combines the best features of traditional and structured diagnostic logging in an easy-to-use package and Serilog.Metrics extends this logging framework with measure capabilities like counters, timers, meters and gauges.
