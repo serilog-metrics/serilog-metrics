@@ -8,7 +8,7 @@
     <language>en-US</language>
     <projectUrl>https://github.com/serilog-metrics/serilog-metrics</projectUrl>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
-    <iconUrl>http://serilog.net/images/serilog-nuget.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/serilog-metrics/serilog-metrics/master/assets/serilog-metrics-128.png</iconUrl>
     <tags>serilog metrics logging diagnostics timing measure</tags>
     <dependencies>
       <dependency id="Serilog" version="$version$" />
