@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
+# Visual Studio 2012
 VisualStudioVersion = 14.0.22512.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5A23229C-5FD9-4483-ABC3-AE3A02E6B677}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerilogMetrics", "src\SerilogMetrics\SerilogMetrics.csproj", "{264C91AF-6631-4E04-A2AC-E32E88055228}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerilogMetrics.Samples.Console", "src\SerilogMetrics.Samples.Console\SerilogMetrics.Samples.Console.csproj", "{9201B67F-FE73-4092-8DB6-1D35219CA3C3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{70C58A7D-60CC-4896-96E2-D088E30AA584}"
 EndProject
@@ -25,12 +27,17 @@ Global
 		{2BC62583-75E2-4A1B-B4DA-54F1FEDAE846}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BC62583-75E2-4A1B-B4DA-54F1FEDAE846}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BC62583-75E2-4A1B-B4DA-54F1FEDAE846}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
+		{9201B67F-FE73-4092-8DB6-1D35219CA3C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9201B67F-FE73-4092-8DB6-1D35219CA3C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9201B67F-FE73-4092-8DB6-1D35219CA3C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9201B67F-FE73-4092-8DB6-1D35219CA3C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{264C91AF-6631-4E04-A2AC-E32E88055228} = {5A23229C-5FD9-4483-ABC3-AE3A02E6B677}
+		{9201B67F-FE73-4092-8DB6-1D35219CA3C3} = {5A23229C-5FD9-4483-ABC3-AE3A02E6B677}
 		{2BC62583-75E2-4A1B-B4DA-54F1FEDAE846} = {70C58A7D-60CC-4896-96E2-D088E30AA584}
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
