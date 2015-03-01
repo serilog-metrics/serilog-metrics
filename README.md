@@ -32,4 +32,4 @@ using (logger.BeginTimedOperation("Time a thread sleep for 2 seconds."))
 
 See the [documentation](https://github.com/serilog-metrics/serilog-metrics/wiki) for more details.
 
-Copyright &copy; 2015 Serilog Contributors - Provided under the [Apache License, Version 2.0](http://apache.org/licenses/LICENSE-2.0.html).
+Copyright &copy; 2015 Serilog Metrics Contributors - Provided under the [Apache License, Version 2.0](http://apache.org/licenses/LICENSE-2.0.html).
