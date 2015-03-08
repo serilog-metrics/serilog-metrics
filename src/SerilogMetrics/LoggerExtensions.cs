@@ -219,6 +219,16 @@ namespace Serilog
 			return new HealthMeasure (logger, name, healthFunction, healthyLevel, unHealthyLevel, template);
 		}
 
+
+		public static ProgressLogger StartProgress(this ILogger logger, string name)
+		{
+			if (string.IsNullOrWhiteSpace(name))
+				throw new ArgumentNullException("name");
+
+			return new ProgressLogger (logger, name);
+
+		}
+
     }
 
 
