@@ -1,4 +1,4 @@
-SerilogMetrics [![Build status](https://ci.appveyor.com/api/projects/status/ou1ofq2vvc0gd0jo/branch/master?svg=true)](https://ci.appveyor.com/project/mivano/serilog-metrics/branch/master) ![https://www.nuget.org/packages/SerilogMetrics/](https://img.shields.io/nuget/v/SerilogMetrics.svg)
+SerilogMetrics [![Build status](https://ci.appveyor.com/api/projects/status/ou1ofq2vvc0gd0jo/branch/master?svg=true)](https://ci.appveyor.com/project/mivano/serilog-metrics/branch/master) [![NuGet](https://img.shields.io/nuget/v/SerilogMetrics.svg)](https://www.nuget.org/packages/SerilogMetrics/)
 =================================================================================================================================================
 
 Serilog combines the best features of traditional and structured diagnostic logging in an easy-to-use package and Serilog.Metrics extends this logging framework with measure capabilities like counters, timers, meters and gauges.
