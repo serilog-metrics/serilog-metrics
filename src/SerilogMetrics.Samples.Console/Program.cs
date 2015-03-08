@@ -69,6 +69,14 @@ namespace SerilogMetrics.Samples.Console
 			counter.Increment();
 			counter.Decrement();
 
+			// Progress
+			using (var p = logger.StartProgress ("test-1", "test-progress")) {
+
+
+
+				p.Finish ();
+			}
+
 			System.Console.WriteLine("Press a key to exit.");
 			System.Console.ReadKey(true);
 		}
