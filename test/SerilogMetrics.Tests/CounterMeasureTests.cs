@@ -109,6 +109,29 @@ namespace SerilogMetrics.Tests
 			check.Reset ();
 			Assert.AreEqual ("\"invocations\" count = 0 times", _eventSeen.RenderMessage ());
 		}
+
+	    [Test ()]
+	    public void CounterWritesWhenFuncReturnsTrue()
+	    {
+            var check = Log.Logger.CountOperation("invocations", "times", false, LogEventLevel.Debug, writeRule: (e, i) => (i % 2) == 0);
+
+	        var lastSeenMessage = "";
+
+	        var numberOfEventsEmitted = 0;
+
+            for (var i = 0; i < 20; i++)
+	        {
+	            check.Increment();
+
+	            if (_eventSeen != null && lastSeenMessage != _eventSeen.RenderMessage())
+	            {
+	                lastSeenMessage = _eventSeen.RenderMessage();
+	                numberOfEventsEmitted++;
+	            }
+	        }
+
+            Assert.AreEqual (10, numberOfEventsEmitted);
+	    }
 	}
 	
 }

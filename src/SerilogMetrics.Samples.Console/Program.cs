@@ -69,6 +69,15 @@ namespace SerilogMetrics.Samples.Console
 			counter.Increment();
 			counter.Decrement();
 
+
+            var counterFunc = logger.CountOperation("counter", "operation(s)", true, LogEventLevel.Debug, writeRule: (e, i) => (i % 5) == 0);
+
+		    for (var i = 0; i < 11; i++)
+		    {
+                counterFunc.Increment();
+		    }
+
+
 			System.Console.WriteLine("Press a key to exit.");
 			System.Console.ReadKey(true);
 		}
