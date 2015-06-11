@@ -14,6 +14,7 @@
 
 using Serilog.Events;
 using Serilog;
+using System;
 
 namespace SerilogMetrics
 {
