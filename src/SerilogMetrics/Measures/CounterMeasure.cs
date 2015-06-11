@@ -29,6 +29,8 @@ namespace SerilogMetrics
         readonly string _template;
         readonly bool _directWrite;
         readonly AtomicLong _value;
+        readonly AtomicLong _runValue;
+        readonly Func<long, long, bool> _writeRule; 
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CounterMeasure"/> class.
@@ -39,7 +41,8 @@ namespace SerilogMetrics
         /// <param name="level">The level.</param>
         /// <param name="template">The template.</param>
         /// <param name="directWrite">if set to <c>true</c> then directly write to the log.</param>
-        public CounterMeasure(ILogger logger, string name, string counts, LogEventLevel level, string template, bool directWrite = false)
+        /// <param name="writeRule">Func to determine when to write to logs based on the result of the Func</param>
+        public CounterMeasure(ILogger logger, string name, string counts, LogEventLevel level, string template, bool directWrite = false, Func<long, long, bool> writeRule = null)
         {
             _logger = logger;
             _name = name;
@@ -48,6 +51,8 @@ namespace SerilogMetrics
             _template = template;
             _directWrite = directWrite;
             _value = new AtomicLong();
+            _runValue = new AtomicLong();
+            _writeRule = writeRule ?? ((v, c) => false);
         }
 
 		/// <summary>
@@ -56,9 +61,11 @@ namespace SerilogMetrics
         public virtual void Increment()
         {
             _value.Increment();
+		    
+            _runValue.Increment();
 
-            if (_directWrite)
-                Write();
+		    if ((_directWrite) || _writeRule(_value.Get(), _runValue.Get()))
+		        Write();
         }
 
 		/// <summary>
@@ -68,7 +75,9 @@ namespace SerilogMetrics
         {
             _value.Decrement();
 
-            if (_directWrite)
+            _runValue.Increment();
+
+            if ((_directWrite) || _writeRule(_value.Get(), _runValue.Get()))
                 Write();
 
         }
@@ -80,7 +89,7 @@ namespace SerilogMetrics
         {
             _value.Set(0);
 
-            if (_directWrite)
+            if ((_directWrite) || _writeRule(_value.Get(), _runValue.Get()))
                 Write();
         }
 
