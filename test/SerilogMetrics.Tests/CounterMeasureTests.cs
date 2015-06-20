@@ -129,7 +129,7 @@ namespace SerilogMetrics.Tests
 
             Assert.AreEqual(_eventsLogged.Count, 6);
 
-            Assert.AreEqual("\"invocations\" count = 18 times at 1 resolution", _eventSeen.RenderMessage());
+            Assert.AreEqual("\"invocations\" count = 18 times at 3 resolution", _eventSeen.RenderMessage());
 
             _eventsLogged.Clear();
         }
