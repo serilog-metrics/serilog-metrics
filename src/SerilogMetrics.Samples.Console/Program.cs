@@ -63,7 +63,7 @@ namespace SerilogMetrics.Samples.Console
 			gauge.Write();
 
 			// Counter
-			var counter = logger.CountOperation("counter", "operation(s)", true, LogEventLevel.Debug);
+			var counter = logger.CountOperation("counter", "operation(s)", true, LogEventLevel.Debug, resolution: 2);
 			counter.Increment();
 			counter.Increment();
 			counter.Increment();
