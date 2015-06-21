@@ -35,7 +35,12 @@ namespace Serilog
 		/// <summary>
 		/// The default count template.
 		/// </summary>
-        public const string DefaultCountTemplate = "{CounterName} count = {CounterValue} {CounterUnit:l} at {Resolution} resolution";
+        public const string DefaultCountTemplate = "{CounterName} count = {CounterValue} {CounterUnit:l}";
+
+        /// <summary>
+        /// The default count template.
+        /// </summary>
+        public const string DefaultResolutionCountTemplate = "{CounterName} count = {CounterValue} {CounterUnit:l} at {CounterResolution} resolution";
 
 		/// <summary>
 		/// The default meter template.
@@ -164,12 +169,20 @@ namespace Serilog
             bool directWrite = true,
            LogEventLevel level = LogEventLevel.Information,
            string template = DefaultCountTemplate,
-            int resolution = 1)
+            int? resolution = null)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentNullException("name");
 
-            return new CounterMeasure(logger, name, uom, level, template, directWrite, resolution);
+            var counterResolution = 1;
+
+            if (resolution.HasValue)
+            {
+                template = DefaultResolutionCountTemplate;
+                counterResolution = resolution.Value;
+            }
+
+            return new CounterMeasure(logger, name, uom, level, template, directWrite, counterResolution);
         }
 
 		/// <summary>

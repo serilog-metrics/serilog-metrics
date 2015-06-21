@@ -79,7 +79,7 @@ namespace SerilogMetrics.Tests
 			check.Write ();
 
 			Assert.AreEqual (LogEventLevel.Information, _eventSeen.Level);
-            Assert.AreEqual ("\"invocations\" count = 1 times at 1 resolution", _eventSeen.RenderMessage());
+            Assert.AreEqual ("\"invocations\" count = 1 times", _eventSeen.RenderMessage());
 
             _eventsLogged.Clear();
 		}
@@ -103,16 +103,16 @@ namespace SerilogMetrics.Tests
 			var check = Log.Logger.CountOperation("invocations", "times", true);
 
 			check.Increment ();
-            Assert.AreEqual ("\"invocations\" count = 1 times at 1 resolution", _eventSeen.RenderMessage());
+            Assert.AreEqual ("\"invocations\" count = 1 times", _eventSeen.RenderMessage());
 
 			check.Increment ();
-            Assert.AreEqual ("\"invocations\" count = 2 times at 1 resolution", _eventSeen.RenderMessage());
+            Assert.AreEqual ("\"invocations\" count = 2 times", _eventSeen.RenderMessage());
 
 			check.Decrement ();
-            Assert.AreEqual ("\"invocations\" count = 1 times at 1 resolution", _eventSeen.RenderMessage());
+            Assert.AreEqual ("\"invocations\" count = 1 times", _eventSeen.RenderMessage());
 
 			check.Reset ();
-            Assert.AreEqual ("\"invocations\" count = 0 times at 1 resolution", _eventSeen.RenderMessage());
+            Assert.AreEqual ("\"invocations\" count = 0 times", _eventSeen.RenderMessage());
 
             _eventsLogged.Clear();
 		}
