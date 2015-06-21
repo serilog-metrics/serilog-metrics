@@ -29,17 +29,20 @@ namespace SerilogMetrics
         readonly string _template;
         readonly bool _directWrite;
         readonly AtomicLong _value;
+        readonly AtomicLong _iterations;
+        readonly int _resolution;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CounterMeasure"/> class.
-        /// </summary>
-        /// <param name="logger">The logger.</param>
-        /// <param name="name">The name.</param>
-        /// <param name="counts">The counts.</param>
-        /// <param name="level">The level.</param>
-        /// <param name="template">The template.</param>
-        /// <param name="directWrite">if set to <c>true</c> then directly write to the log.</param>
-        public CounterMeasure(ILogger logger, string name, string counts, LogEventLevel level, string template, bool directWrite = false)
+	    /// <summary>
+	    /// Initializes a new instance of the <see cref="CounterMeasure"/> class.
+	    /// </summary>
+	    /// <param name="logger">The logger.</param>
+	    /// <param name="name">The name.</param>
+	    /// <param name="counts">The counts.</param>
+	    /// <param name="level">The level.</param>
+	    /// <param name="template">The template.</param>
+	    /// <param name="directWrite">if set to <c>true</c> then directly write to the log.</param>
+        /// <param name="resolution">Number of calls to Increment or Decrement before writing an event to the log</param>
+	    public CounterMeasure(ILogger logger, string name, string counts, LogEventLevel level, string template, bool directWrite = false, int resolution = 1)
         {
             _logger = logger;
             _name = name;
@@ -47,7 +50,9 @@ namespace SerilogMetrics
             _level = level;
             _template = template;
             _directWrite = directWrite;
+	        _resolution = resolution;
             _value = new AtomicLong();
+            _iterations = new AtomicLong();
         }
 
 		/// <summary>
@@ -57,7 +62,9 @@ namespace SerilogMetrics
         {
             _value.Increment();
 
-            if (_directWrite)
+		    _iterations.Increment();
+
+            if (_directWrite && (_iterations.Get() % _resolution) == 0)
                 Write();
         }
 
@@ -68,7 +75,9 @@ namespace SerilogMetrics
         {
             _value.Decrement();
 
-            if (_directWrite)
+            _iterations.Increment();
+
+            if (_directWrite && (_iterations.Get() % _resolution) == 0)
                 Write();
 
         }
@@ -80,6 +89,8 @@ namespace SerilogMetrics
         {
             _value.Set(0);
 
+            _iterations.Set(0);
+
             if (_directWrite)
                 Write();
         }
@@ -90,7 +101,7 @@ namespace SerilogMetrics
 		public virtual void Write()
         {
             var value = _value.Get();
-            _logger.Write(_level, _template, _name, value, _counts);
+            _logger.Write(_level, _template, _name, value, _counts, _resolution);
         }
 
 		/// <summary>
@@ -100,5 +111,14 @@ namespace SerilogMetrics
 
 			return _value.Get ();
 		}
+
+	    /// <summary>
+	    /// Retrieves the current iteration
+	    /// </summary>
+	    /// <returns></returns>
+	    public virtual long Interation()
+        {
+	        return _iterations.Get();
+	    }
     }
 }

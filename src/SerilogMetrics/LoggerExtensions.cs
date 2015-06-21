@@ -35,7 +35,12 @@ namespace Serilog
 		/// <summary>
 		/// The default count template.
 		/// </summary>
-		public const string DefaultCountTemplate = "{CounterName} count = {CounterValue} {CounterUnit:l}";
+        public const string DefaultCountTemplate = "{CounterName} count = {CounterValue} {CounterUnit:l}";
+
+        /// <summary>
+        /// The default count template.
+        /// </summary>
+        public const string DefaultResolutionCountTemplate = "{CounterName} count = {CounterValue} {CounterUnit:l} at {CounterResolution} resolution";
 
 		/// <summary>
 		/// The default meter template.
@@ -155,6 +160,7 @@ namespace Serilog
         /// <param name="directWrite">Indicates if a change in the counter needs to be written to the log directly. By default enabled. When disabled, you need to explicitly call the Write() method to output the current value.</param>
         /// <param name="level">The level used to write the timing operation details to the log. By default this is the information level.</param>
         /// <param name="template">A message template describing the format used to write to the log.</param>
+        /// <param name="resolution">Number of calls to Increment or Decrement before writing an event to the log</param>
         /// <returns></returns>
         public static ICounterMeasure CountOperation(
            this ILogger logger,
@@ -162,12 +168,21 @@ namespace Serilog
             string uom = "operation(s)",
             bool directWrite = true,
            LogEventLevel level = LogEventLevel.Information,
-           string template = DefaultCountTemplate)
+           string template = DefaultCountTemplate,
+            int? resolution = null)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentNullException("name");
 
-            return new CounterMeasure(logger, name, uom, level, template, directWrite);
+            var counterResolution = 1;
+
+            if (resolution.HasValue)
+            {
+                template = DefaultResolutionCountTemplate;
+                counterResolution = resolution.Value;
+            }
+
+            return new CounterMeasure(logger, name, uom, level, template, directWrite, counterResolution);
         }
 
 		/// <summary>

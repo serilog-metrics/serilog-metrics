@@ -20,13 +20,14 @@ using Serilog;
 
 namespace SerilogMetrics.Tests
 {
+    using System.Collections.Generic;
 
-
-
-	[TestFixture ()]
+    [TestFixture ()]
 	public class CounterMeasureTests
 	{
 		LogEvent _eventSeen;
+
+        private List<LogEvent> _eventsLogged = new List<LogEvent>();
 
 		public CounterMeasureTests ()
 		{
@@ -34,7 +35,7 @@ namespace SerilogMetrics.Tests
 			var logger = configuration
 				.MinimumLevel.Verbose()               // Make sure we see also the lowest level
 				.WriteTo.Observers(events => events   // So we can check the result
-					.Do(evt => { _eventSeen = evt; })
+					.Do(evt => { _eventSeen = evt; _eventsLogged.Add(evt); })
 					.Subscribe())
 				.WriteTo.Console()                    // Still visible in the unit test console
 				.CreateLogger();
@@ -61,6 +62,8 @@ namespace SerilogMetrics.Tests
 			check.Reset ();
 			Assert.AreEqual (check.Value (), 0);
 
+            _eventsLogged.Clear();
+
 			}
 
 		[Test ()]
@@ -76,8 +79,9 @@ namespace SerilogMetrics.Tests
 			check.Write ();
 
 			Assert.AreEqual (LogEventLevel.Information, _eventSeen.Level);
-			Assert.AreEqual ("\"invocations\" count = 1 times", _eventSeen.RenderMessage ());
+            Assert.AreEqual ("\"invocations\" count = 1 times", _eventSeen.RenderMessage());
 
+            _eventsLogged.Clear();
 		}
 
 		[Test ()]
@@ -90,6 +94,7 @@ namespace SerilogMetrics.Tests
 
 			Assert.AreEqual (LogEventLevel.Debug, _eventSeen.Level);
 
+            _eventsLogged.Clear();
 		}
 
 		[Test ()]
@@ -98,17 +103,36 @@ namespace SerilogMetrics.Tests
 			var check = Log.Logger.CountOperation("invocations", "times", true);
 
 			check.Increment ();
-			Assert.AreEqual ("\"invocations\" count = 1 times", _eventSeen.RenderMessage ());
+            Assert.AreEqual ("\"invocations\" count = 1 times", _eventSeen.RenderMessage());
 
 			check.Increment ();
-			Assert.AreEqual ("\"invocations\" count = 2 times", _eventSeen.RenderMessage ());
+            Assert.AreEqual ("\"invocations\" count = 2 times", _eventSeen.RenderMessage());
 
 			check.Decrement ();
-			Assert.AreEqual ("\"invocations\" count = 1 times", _eventSeen.RenderMessage ());
+            Assert.AreEqual ("\"invocations\" count = 1 times", _eventSeen.RenderMessage());
 
 			check.Reset ();
-			Assert.AreEqual ("\"invocations\" count = 0 times", _eventSeen.RenderMessage ());
+            Assert.AreEqual ("\"invocations\" count = 0 times", _eventSeen.RenderMessage());
+
+            _eventsLogged.Clear();
 		}
+
+        [Test()]
+        public void CounterWritesAtSpecifiedResolution()
+        {
+            var check = Log.Logger.CountOperation("invocations", "times", true, resolution: 3);
+            
+            for (var i = 0; i < 20; i++)
+            {
+                check.Increment();
+            }
+
+            Assert.AreEqual(_eventsLogged.Count, 6);
+
+            Assert.AreEqual("\"invocations\" count = 18 times at 3 resolution", _eventSeen.RenderMessage());
+
+            _eventsLogged.Clear();
+        }
 	}
 	
 }
