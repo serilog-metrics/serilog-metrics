@@ -16,6 +16,7 @@ using System;
 using Serilog.Events;
 using SerilogMetrics;
 using System.Collections.Concurrent;
+using SerilogMetrics.Measures;
 
 // Analysis disable once CheckNamespace
 namespace Serilog
@@ -78,7 +79,7 @@ namespace Serilog
 		/// }
 		/// </code>
 		/// </example>
-		public static IDisposable BeginTimedOperation(
+		public static ITimingMeasure BeginTimedOperation(
             this ILogger logger,
             string description,
             string identifier = null,

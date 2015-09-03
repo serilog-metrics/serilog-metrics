@@ -17,13 +17,14 @@ using System.Linq;
 using System.Diagnostics;
 using Serilog.Events;
 using Serilog;
+using SerilogMetrics.Measures;
 
 namespace SerilogMetrics
 {
 	/// <summary>
 	/// Timed operation.
 	/// </summary>
-	public class TimedOperation : IDisposable
+	public class TimedOperation : ITimingMeasure
 	{
 		readonly ILogger _logger;
 		readonly LogEventLevel _level;
@@ -96,12 +97,8 @@ namespace SerilogMetrics
 		/// </summary>
 		public virtual void Dispose ()
 		{
-			_sw.Stop ();
-
-			if (_warnIfExceeds.HasValue && _sw.Elapsed > _warnIfExceeds.Value)
-				_logger.Write (_levelExceeds, _exceededOperationMessage, GeneratePropertyBag (_identifier, _description, _warnIfExceeds.Value, _sw.Elapsed, _sw.ElapsedMilliseconds));
-			else
-				_logger.Write (_level, _completedOperationMessage, GeneratePropertyBag (_identifier, _description, _sw.Elapsed, _sw.ElapsedMilliseconds));
+            Complete(false);
+            Write();
 		}
 
 		/// <summary>
@@ -117,5 +114,27 @@ namespace SerilogMetrics
 				return values;
 		
 		}
-	}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Write()
+        {
+            Complete(false);
+            if (_warnIfExceeds.HasValue && _sw.Elapsed > _warnIfExceeds.Value)
+                _logger.Write(_levelExceeds, _exceededOperationMessage, GeneratePropertyBag(_identifier, _description, _warnIfExceeds.Value, _sw.Elapsed, _sw.ElapsedMilliseconds));
+            else
+                _logger.Write(_level, _completedOperationMessage, GeneratePropertyBag(_identifier, _description, _sw.Elapsed, _sw.ElapsedMilliseconds));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Complete(bool write=true)
+        {
+            _sw.Stop();
+            if (write)
+                Write();
+        }
+    }
 }

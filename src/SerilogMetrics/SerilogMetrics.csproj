@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LoggerExtensions.cs" />
+    <Compile Include="Measures\ITimingMeasure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\assets\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
