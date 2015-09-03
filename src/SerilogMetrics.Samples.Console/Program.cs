@@ -48,6 +48,10 @@ namespace SerilogMetrics.Samples.Console
 				Thread.Sleep(1100);
 			}
 
+            var timedEvent = logger.BeginTimedOperation("Stopping timed event manually");
+            Thread.Sleep(1000);
+            timedEvent.Complete();
+
 			// Gauge
 			var queue = new Queue<int>();
 			var gauge = logger.GaugeOperation("queue", "item(s)", () => queue.Count());
