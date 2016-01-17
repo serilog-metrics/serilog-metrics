@@ -75,6 +75,7 @@
     <Compile Include="Measures\IHealthMeasure.cs" />
     <Compile Include="Measures\IMeterMeasure.cs" />
     <Compile Include="Measures\MeterMeasure.cs" />
+    <Compile Include="Progress\ProgressLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -83,4 +84,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Progress\" />
+  </ItemGroup>
 </Project>
