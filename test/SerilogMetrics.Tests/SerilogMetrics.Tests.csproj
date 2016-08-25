@@ -28,12 +28,20 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serilog.1.5.14\lib\net45\Serilog.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.4.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NUnit.3.4.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Serilog.FullNetFx, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serilog.1.5.14\lib\net45\Serilog.FullNetFx.dll</HintPath>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serilog.2.1.0\lib\net45\Serilog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Console, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serilog.Sinks.Console.2.1.0\lib\net45\Serilog.Sinks.Console.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Observable, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serilog.Sinks.Observable.2.0.0\lib\net45\Serilog.Sinks.Observable.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -49,9 +57,6 @@
     <Reference Include="System.Reactive.PlatformServices">
       <HintPath>..\..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HealthMeasureTests.cs" />
@@ -62,6 +67,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -69,5 +75,8 @@
       <Project>{264C91AF-6631-4E04-A2AC-E32E88055228}</Project>
       <Name>SerilogMetrics</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
 </Project>

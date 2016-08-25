@@ -28,12 +28,24 @@
     <Externalconsole>true</Externalconsole>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Serilog, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serilog.1.5.14\lib\net45\Serilog.dll</HintPath>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serilog.2.1.0\lib\net45\Serilog.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Serilog.FullNetFx, Version=1.5.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Serilog.1.5.14\lib\net45\Serilog.FullNetFx.dll</HintPath>
+    <Reference Include="Serilog.Enrichers.Environment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serilog.Enrichers.Environment.2.1.1-dev-00724\lib\net45\Serilog.Enrichers.Environment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog.Enrichers.Thread, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serilog.Enrichers.Thread.2.0.0\lib\net45\Serilog.Enrichers.Thread.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog.Sinks.ColoredConsole, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serilog.Sinks.ColoredConsole.2.0.0\lib\net45\Serilog.Sinks.ColoredConsole.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Trace, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Serilog.Sinks.Trace.2.0.0\lib\net45\Serilog.Sinks.Trace.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -50,6 +62,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
 </Project>
