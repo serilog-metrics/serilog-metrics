@@ -1,0 +1,19 @@
+﻿{
+  "dependencies": {
+    "NUnit": "3.4.1",
+    "Rx-Core": "2.2.5",
+    "Rx-Interfaces": "2.2.5",
+    "Rx-Linq": "2.2.5",
+    "Rx-Main": "2.2.5",
+    "Rx-PlatformServices": "2.2.5",
+    "Serilog": "2.1.0",
+    "Serilog.Sinks.Console": "2.1.0",
+    "Serilog.Sinks.Observable": "2.0.0",
+  },
+  "frameworks": {
+    "net45": { }
+  },
+  "runtimes": {
+    "win": {}
+  }
+}
