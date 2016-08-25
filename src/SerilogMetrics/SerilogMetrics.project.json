@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "Serilog": "2.1.0"
+  },
+  "frameworks": {
+    "net45": { }
+  },
+  "runtimes": {
+    "win": {}
+  }
+}

@@ -73,10 +73,8 @@
     <Compile Include="Measures\MeterMeasure.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="SerilogMetrics.nuspec" />
+    <None Include="SerilogMetrics.project.json" />
     <None Include="SerilogMetrics.snk" />
   </ItemGroup>
   <ItemGroup />
