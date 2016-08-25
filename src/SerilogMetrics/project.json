@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0-*",
+  "title": "SerilogMetrics",
+  "description": "Provides utilities to facilitate metrics (timers, counters, gauges, meters, healthchecks) on top of Serilog.",
+  "authors": [ "SerilogMetrics Contributors" ],
+  "packOptions": {
+    "projectUrl": "https://github.com/serilog-metrics/serilog-metrics",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/serilog-metrics/serilog-metrics.git"
+    },
+    "iconUrl": "https://raw.githubusercontent.com/serilog-metrics/serilog-metrics/master/assets/serilog-metrics-128.png",
+    "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
+    "tags": [ "serilog", "metrics", "logging", "diagnostics", "timing measure" ]
+  },
+
+  "dependencies": {
+    "Serilog": "2.1.0"
+  },
+
+  "frameworks": {
+    "net45": {},
+    "netstandard1.1": {
+      "dependencies": {
+        "System.Collections.Concurrent": "4.0.12",
+        "System.Threading": "4.0.11"
+      }
+    }
+  }
+}

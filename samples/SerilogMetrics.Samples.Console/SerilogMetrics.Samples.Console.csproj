@@ -56,7 +56,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\SerilogMetrics\SerilogMetrics.csproj">
+    <ProjectReference Include="..\..\src\SerilogMetrics\SerilogMetrics.csproj">
       <Project>{264C91AF-6631-4E04-A2AC-E32E88055228}</Project>
       <Name>SerilogMetrics</Name>
     </ProjectReference>

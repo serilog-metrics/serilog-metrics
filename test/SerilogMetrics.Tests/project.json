@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0-*",
+  "title": "SerilogMetrics.Tests",
+
+  "testRunner": "nunit",
+  "dependencies": {
+    "NUnit": "3.4.1",
+    "dotnet-test-nunit": "3.4.0-beta-2",
+    "Rx-Core": "2.2.5",
+    "Rx-Interfaces": "2.2.5",
+    "Rx-Linq": "2.2.5",
+    "Rx-Main": "2.2.5",
+    "Rx-PlatformServices": "2.2.5",
+    "Serilog.Sinks.Console": "2.1.0",
+    "Serilog.Sinks.Observable": "2.0.0",
+    "SerilogMetrics": { "target": "project" }
+  },
+  "frameworks": {
+    "net451": {},
+    "netcoreapp1.0": {
+      "imports": "portable-net45+win8",
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0",
+          "type": "platform"
+        }
+      }
+    }
+  }
+}
