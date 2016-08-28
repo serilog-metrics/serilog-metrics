@@ -14,8 +14,7 @@
 
 using System;
 using Serilog.Events;
-using SerilogMetrics;
-using System.Collections.Concurrent;
+using SerilogMetrics;                   
 
 // Analysis disable once CheckNamespace
 namespace Serilog
