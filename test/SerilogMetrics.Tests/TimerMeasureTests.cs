@@ -12,88 +12,78 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using NUnit.Framework;
 using System;
 using Serilog.Events;
 using System.Reactive.Linq;
 using Serilog.Context;
 using Serilog;
+using Xunit;
 
 namespace SerilogMetrics.Tests
 {
 
+    public class TimerMeasureTests : IClassFixture<SerilogFixture>
+    {
 
-	[TestFixture ()]
-	public class TimerMeasureTests
-	{
-		LogEvent _eventSeen;
+        SerilogFixture fixture;
 
-		public TimerMeasureTests ()
-		{
-			var configuration = new LoggerConfiguration();
-			var logger = configuration
-				.MinimumLevel.Verbose()               // Make sure we see also the lowest level
-				.WriteTo.Observers(events => events   // So we can check the result
-					.Do(evt => { _eventSeen = evt; })
-					.Subscribe())
-				.WriteTo.Console()                    // Still visible in the unit test console
-				.Enrich.FromLogContext()
-				.CreateLogger();
+        public TimerMeasureTests(SerilogFixture fixture)
+        {
+            this.fixture = fixture;
+        }
 
-			Log.Logger = logger;
-		}
+        [Fact]
+        public void TimedOperationShouldWriteMessages()
+        {
+            var check = fixture.Logger.BeginTimedOperation("test", "test-id");
 
-		[Test ()]
-		public void TimedOperationShouldWriteMessages ()
-		{
-			var check = Log.Logger.BeginTimedOperation("test", "test-id");
+            Assert.Equal("Beginning operation \"test-id\": \"test\"", fixture.EventSeen.RenderMessage());
 
-			Assert.AreEqual ("Beginning operation \"test-id\": \"test\"", _eventSeen.RenderMessage());
+            check.Dispose();
+            Assert.True(fixture.EventSeen.RenderMessage().StartsWith("Completed operation \"test-id\"", StringComparison.Ordinal));
 
-			check.Dispose ();
-			Assert.IsTrue (_eventSeen.RenderMessage ().StartsWith ("Completed operation \"test-id\"", StringComparison.Ordinal));
+        }
 
-		}
+        [Fact]
+        public void OperationThatExceedsTimeShouldRenderMessages()
+        {
+            var check = fixture.Logger.BeginTimedOperation("test", "test-id", LogEventLevel.Information, TimeSpan.FromMilliseconds(2));
 
-		[Test ()]
-		public void OperationThatExceedsTimeShouldRenderMessages ()
-		{
-			var check = Log.Logger.BeginTimedOperation("test", "test-id", LogEventLevel.Information, TimeSpan.FromMilliseconds(2));
+            Assert.Equal("Beginning operation \"test-id\": \"test\"", fixture.EventSeen.RenderMessage());
 
-			Assert.AreEqual ("Beginning operation \"test-id\": \"test\"", _eventSeen.RenderMessage());
+            // Wait at least 30 milliseconds
 
-			// Wait at least 30 milliseconds
+            System.Threading.Thread.Sleep(30);
 
-			System.Threading.Thread.Sleep (30);
+            check.Dispose();
 
-			check.Dispose ();
+            Assert.True(fixture.EventSeen.RenderMessage().Contains("exceeded"));
+            Assert.Equal(LogEventLevel.Warning, fixture.EventSeen.Level);
+            Assert.True(Convert.ToInt32(fixture.EventSeen.Properties["TimedOperationElapsedInMs"].ToString()) >= 30);
+            Assert.True(fixture.EventSeen.Properties.ContainsKey("WarningLimit"));
 
-			Assert.IsTrue (_eventSeen.RenderMessage ().Contains ("exceeded"));
-			Assert.AreEqual (LogEventLevel.Warning, _eventSeen.Level);
-			Assert.IsTrue (Convert.ToInt32(_eventSeen.Properties ["TimedOperationElapsedInMs"].ToString()) >= 30);
-			Assert.IsTrue (_eventSeen.Properties.ContainsKey ("WarningLimit"));
+        }
 
-		}
+        [Fact]
+        public void CanAddAdditionalProperties()
+        {
+            var check = fixture.Logger.BeginTimedOperation("test", "test-id");
 
-		[Test ()]
-		public void CanAddAdditionalProperties ()
-		{
-			var check = Log.Logger.BeginTimedOperation("test", "test-id");
+            using (LogContext.PushProperty("numberOfOperations", 10))
+            {
 
-			using (LogContext.PushProperty ("numberOfOperations", 10)) {
-			
-				Assert.AreEqual ("Beginning operation \"test-id\": \"test\"", _eventSeen.RenderMessage ());
+                Assert.Equal("Beginning operation \"test-id\": \"test\"", fixture.EventSeen.RenderMessage());
 
-				check.Dispose ();
-				Assert.IsTrue (_eventSeen.RenderMessage ().StartsWith ("Completed operation \"test-id\"", StringComparison.Ordinal));
-			}
+                check.Dispose();
+                Assert.True(fixture.EventSeen.RenderMessage().StartsWith("Completed operation \"test-id\"", StringComparison.Ordinal));
+            }
 
-			Assert.IsTrue (_eventSeen.Properties.ContainsKey ("numberOfOperations"));
-			Assert.IsTrue (_eventSeen.Properties ["numberOfOperations"].ToString() == "10");
+            Assert.True(fixture.EventSeen.Properties.ContainsKey("numberOfOperations"));
+            Assert.True(fixture.EventSeen.Properties["numberOfOperations"].ToString() == "10");
 
-		}
+        }
 
 
-	}
-	
+    }
+
 }

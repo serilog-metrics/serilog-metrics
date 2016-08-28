@@ -295,12 +295,20 @@ namespace SerilogMetrics
 
 		public void Set(double value)
 		{
+#if !DOTNETCORE
 			Thread.VolatileWrite(ref _value, value);
+#else
+            Volatile.Write(ref _value, value);
+#endif
 		}
 
 		public double Get()
 		{
+#if !DOTNETCORE
 			return Thread.VolatileRead(ref _value);
+#else
+            return Volatile.Read(ref _value);
+#endif
 		}
 
 		public static implicit operator VolatileDouble(double value)

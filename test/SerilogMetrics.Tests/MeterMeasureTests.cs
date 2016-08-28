@@ -12,68 +12,59 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using NUnit.Framework;
 using System;
 using Serilog.Events;
 using System.Reactive.Linq;
 using Serilog.Context;
 using System.Collections.Generic;
 using Serilog;
+using Xunit;
 
 namespace SerilogMetrics.Tests
 {
-	[TestFixture ()]
-	public class MeterMeasureTests
-	{
-		LogEvent _eventSeen;
 
-		public MeterMeasureTests ()
-		{
-			var configuration = new LoggerConfiguration();
-			var logger = configuration
-				.MinimumLevel.Verbose()               // Make sure we see also the lowest level
-				.WriteTo.Observers(events => events   // So we can check the result
-					.Do(evt => { _eventSeen = evt; })
-					.Subscribe())
-				.WriteTo.Console()                    // Still visible in the unit test console
-				.Enrich.FromLogContext()
-				.CreateLogger();
+    public class MeterMeasureTests : IClassFixture<SerilogFixture>
+    {
 
-			Log.Logger = logger;
-		}
+        SerilogFixture fixture;
+
+        public MeterMeasureTests(SerilogFixture fixture)
+        {
+            this.fixture = fixture;
+        }
 
 
-		[Test ()]
-		public void MeterShouldWriteOutput ()
-		{
-			var meter = Log.Logger.MeterOperation("server load", "requests", TimeUnit.Seconds);
+        [Fact]
+        public void MeterShouldWriteOutput()
+        {
+            var meter = fixture.Logger.MeterOperation("server load", "requests", TimeUnit.Seconds);
 
-			meter.Mark ();
+            meter.Mark();
 
-			meter.Write ();
+            meter.Write();
 
-			Assert.IsTrue (_eventSeen.RenderMessage ().Contains ("\"server load\" count = 1, "));
+            Assert.True(fixture.EventSeen.RenderMessage().Contains("\"server load\" count = 1, "));
 
 
-			System.Threading.Thread.Sleep (2000);
+            System.Threading.Thread.Sleep(2000);
 
-			meter.Mark (2);
+            meter.Mark(2);
 
-			meter.Write ();
+            meter.Write();
 
-			Assert.IsTrue (_eventSeen.RenderMessage ().Contains ("\"server load\" count = 3, "));
+            Assert.True(fixture.EventSeen.RenderMessage().Contains("\"server load\" count = 3, "));
 
-			//Wait a minute
-			System.Threading.Thread.Sleep (60000);
+            //Wait a minute
+            System.Threading.Thread.Sleep(60000);
 
-			meter.Mark (2);
+            meter.Mark(2);
 
-			meter.Write ();
+            meter.Write();
 
-			Assert.IsTrue (_eventSeen.RenderMessage ().Contains ("\"server load\" count = 5, "));
+            Assert.True(fixture.EventSeen.RenderMessage().Contains("\"server load\" count = 5, "));
 
-			Assert.AreEqual (5, meter.Count);
-		}
-	}
-	
+            Assert.Equal(5, meter.Count);
+        }
+    }
+
 }

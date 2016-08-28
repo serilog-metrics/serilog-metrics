@@ -1,4 +1,4 @@
-SerilogMetrics [![Build status](https://ci.appveyor.com/api/projects/status/ou1ofq2vvc0gd0jo/branch/master?svg=true)](https://ci.appveyor.com/project/mivano/serilog-metrics/branch/master) [![NuGet](https://img.shields.io/nuget/v/SerilogMetrics.svg)](https://www.nuget.org/packages/SerilogMetrics/)
+SerilogMetrics [![Build status](https://ci.appveyor.com/api/projects/status/ou1ofq2vvc0gd0jo/branch/master?svg=true)](https://ci.appveyor.com/project/mivano/serilog-metrics/branch/master) [![NuGet](https://img.shields.io/nuget/v/SerilogMetrics.svg)](https://www.nuget.org/packages/SerilogMetrics/) [![Rager Releases](http://rager.io/badge.svg?url=https%3A%2F%2Fgithub.com%2Fserilog-metrics%2Fserilog-metrics)](http://rager.io/projects/search?badge=1&query=https://github.com/serilog-metrics/serilog-metrics)
 =================================================================================================================================================
 
 Serilog combines the best features of traditional and structured diagnostic logging in an easy-to-use package and Serilog.Metrics extends this logging framework with measure capabilities like counters, timers, meters and gauges.
@@ -32,4 +32,4 @@ using (logger.BeginTimedOperation("Time a thread sleep for 2 seconds."))
 
 See the [documentation](https://github.com/serilog-metrics/serilog-metrics/wiki) for more details.
 
-Copyright &copy; 2015 Serilog Metrics Contributors - Provided under the [Apache License, Version 2.0](http://apache.org/licenses/LICENSE-2.0.html).
+Copyright &copy; 2016 Serilog Metrics Contributors - Provided under the [Apache License, Version 2.0](http://apache.org/licenses/LICENSE-2.0.html).

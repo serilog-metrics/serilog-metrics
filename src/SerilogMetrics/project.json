@@ -1,0 +1,91 @@
+{
+  "version": "0.0.0",
+  "title": "SerilogMetrics",
+  "description": "Provides utilities to facilitate metrics (timers, counters, gauges, meters, healthchecks) on top of Serilog.",
+  "authors": [
+    "SerilogMetrics Contributors"
+  ],
+  "tools": {
+    "dotnet-version": "1.1.0",
+    "dotnet-gitversion": {
+      "version": "*",
+      "imports": [
+        "dotnet"
+      ]
+    }
+  },
+  "buildOptions": {
+    "warningsAsErrors": true,
+    "keyFile": "SerilogMetrics.snk",
+    "xmlDoc": true
+  },
+  "packOptions": {
+    "projectUrl": "https://github.com/serilog-metrics/serilog-metrics",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/serilog-metrics/serilog-metrics.git"
+    },
+    "iconUrl": "https://raw.githubusercontent.com/serilog-metrics/serilog-metrics/master/assets/serilog-metrics-128.png",
+    "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
+    "tags": [
+      "serilog",
+      "metrics",
+      "logging",
+      "diagnostics",
+      "timing",
+      "measure"
+    ]
+  },
+  "dependencies": {
+    "Serilog": "2.1.0"
+  },
+  "configurations": {
+    "Debug": {
+      "buildOptions": {
+        "define": [
+          "DEBUG",
+          "TRACE"
+        ]
+      }
+    },
+    "Release": {
+      "buildOptions": {
+        "define": [
+          "RELEASE",
+          "TRACE"
+        ],
+        "optimize": true
+      }
+    }
+  },
+  "frameworks": {
+    "netcoreapp1.0": {
+      "buildOptions": {
+        "define": [
+          "DOTNETCORE",
+          "NO_SERIALIZATION",
+          "NO_TIMER"
+        ]
+      },
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0",
+          "type": "platform"
+        }
+      },
+      "imports": [
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
+    },
+    "net451": {
+      "frameworkAssemblies": {
+        "System.Threading": "",
+        "System.Collections.Concurrent": ""
+      },
+      "dependencies": {
+        "Microsoft.NETCore.Platforms": "1.0.1"
+      }
+    }
+  }
+}

@@ -12,127 +12,123 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using NUnit.Framework;
-using System;
 using Serilog.Events;
-using System.Reactive.Linq;
 using Serilog;
+using Xunit;
 
 namespace SerilogMetrics.Tests
 {
-    using System.Collections.Generic;
+    public class CounterMeasureTests : IClassFixture<SerilogFixture>
+    {
 
-    [TestFixture ()]
-	public class CounterMeasureTests
-	{
-		LogEvent _eventSeen;
+        SerilogFixture fixture;
 
-        private List<LogEvent> _eventsLogged = new List<LogEvent>();
+        public CounterMeasureTests(SerilogFixture fixture)
+        {
+            this.fixture = fixture;
+        }
 
-		public CounterMeasureTests ()
-		{
-			var configuration = new LoggerConfiguration();
-			var logger = configuration
-				.MinimumLevel.Verbose()               // Make sure we see also the lowest level
-				.WriteTo.Observers(events => events   // So we can check the result
-					.Do(evt => { _eventSeen = evt; _eventsLogged.Add(evt); })
-					.Subscribe())
-				.WriteTo.Console()                    // Still visible in the unit test console
-				.CreateLogger();
 
-			Log.Logger = logger;
-		}
+        [Fact]
+        public void CounterStoresValue()
+        {
+            var check = fixture.Logger.CountOperation("invocations", "times", false);
 
-		[Test ()]
-		public void CounterStoresValue ()
-		{
-			var check = Log.Logger.CountOperation("invocations", "times", false);
+            Assert.Equal(check.Value(), 0);
 
-			Assert.AreEqual (check.Value (), 0);
+            check.Increment();
+            Assert.Equal(check.Value(), 1);
 
-			check.Increment ();
-			Assert.AreEqual (check.Value (), 1);
+            check.Increment();
+            Assert.Equal(check.Value(), 2);
 
-			check.Increment ();
-			Assert.AreEqual (check.Value (), 2);
+            check.Decrement();
+            Assert.Equal(check.Value(), 1);
 
-			check.Decrement ();
-			Assert.AreEqual (check.Value (), 1);
+            check.Reset();
+            Assert.Equal(check.Value(), 0);
 
-			check.Reset ();
-			Assert.AreEqual (check.Value (), 0);
+            fixture.EventsLogged.Clear();
 
-            _eventsLogged.Clear();
+        }
 
-			}
+        [Fact]
+        public void CounterWritesResult()
+        {
+            fixture.EventsLogged.Clear();
 
-		[Test ()]
-		public void CounterWritesResult ()
-		{
-			var check = Log.Logger.CountOperation("invocations", "times", false);
+            var check = fixture.Logger.CountOperation("invocations", "times", false);
 
-			Assert.AreEqual (check.Value (), 0);
+            Assert.Equal(check.Value(), 0);
 
-			check.Increment ();
-			Assert.AreEqual (check.Value (), 1);
-		
-			check.Write ();
+            check.Increment();
+            Assert.Equal(check.Value(), 1);
 
-			Assert.AreEqual (LogEventLevel.Information, _eventSeen.Level);
-            Assert.AreEqual ("\"invocations\" count = 1 times", _eventSeen.RenderMessage());
+            check.Write();
 
-            _eventsLogged.Clear();
-		}
+            Assert.Equal(LogEventLevel.Information, fixture.EventSeen.Level);
+            Assert.Equal("\"invocations\" count = 1 times", fixture.EventSeen.RenderMessage());
 
-		[Test ()]
-		public void CounterWithCustomLevelWritesWithThatLevel ()
-		{
-			var check = Log.Logger.CountOperation("invocations", "times", false, LogEventLevel.Debug);
-		
+            fixture.EventsLogged.Clear();
+        }
 
-			check.Write ();
+        [Fact]
+        public void CounterWithCustomLevelWritesWithThatLevel()
+        {
+            fixture.EventsLogged.Clear();
 
-			Assert.AreEqual (LogEventLevel.Debug, _eventSeen.Level);
+            var check = fixture.Logger.CountOperation("invocations", "times", false, LogEventLevel.Debug);
 
-            _eventsLogged.Clear();
-		}
 
-		[Test ()]
-		public void CounterWritesDirectResultsToLogger ()
-		{
-			var check = Log.Logger.CountOperation("invocations", "times", true);
+            check.Write();
 
-			check.Increment ();
-            Assert.AreEqual ("\"invocations\" count = 1 times", _eventSeen.RenderMessage());
+            Assert.Equal(LogEventLevel.Debug, fixture.EventSeen.Level);
 
-			check.Increment ();
-            Assert.AreEqual ("\"invocations\" count = 2 times", _eventSeen.RenderMessage());
+            fixture.EventsLogged.Clear();
+        }
 
-			check.Decrement ();
-            Assert.AreEqual ("\"invocations\" count = 1 times", _eventSeen.RenderMessage());
+        [Fact]
+        public void CounterWritesDirectResultsToLogger()
+        {
+            fixture.EventsLogged.Clear();
 
-			check.Reset ();
-            Assert.AreEqual ("\"invocations\" count = 0 times", _eventSeen.RenderMessage());
+            var check = fixture.Logger.CountOperation("invocations", "times", true);
 
-            _eventsLogged.Clear();
-		}
+            check.Increment();
+            Assert.Equal("\"invocations\" count = 1 times", fixture.EventSeen.RenderMessage());
 
-        [Test()]
+            check.Increment();
+            Assert.Equal("\"invocations\" count = 2 times", fixture.EventSeen.RenderMessage());
+
+            check.Decrement();
+            Assert.Equal("\"invocations\" count = 1 times", fixture.EventSeen.RenderMessage());
+
+            check.Reset();
+            Assert.Equal("\"invocations\" count = 0 times", fixture.EventSeen.RenderMessage());
+
+            fixture.EventsLogged.Clear();
+        }
+
+        [Fact]
         public void CounterWritesAtSpecifiedResolution()
         {
-            var check = Log.Logger.CountOperation("invocations", "times", true, resolution: 3);
-            
+            fixture.EventsLogged.Clear();
+
+            var check = fixture.Logger.CountOperation("invocations", "times", true, resolution: 3);
+
             for (var i = 0; i < 20; i++)
             {
                 check.Increment();
             }
 
-            Assert.AreEqual(_eventsLogged.Count, 6);
+            Assert.Equal(6, fixture.EventsLogged.Count);
 
-            Assert.AreEqual("\"invocations\" count = 18 times at 3 resolution", _eventSeen.RenderMessage());
+            Assert.Equal("\"invocations\" count = 18 times at 3 resolution", fixture.EventSeen.RenderMessage());
 
-            _eventsLogged.Clear();
+            fixture.EventsLogged.Clear();
         }
-	}
-	
+
+
+    }
+
 }
