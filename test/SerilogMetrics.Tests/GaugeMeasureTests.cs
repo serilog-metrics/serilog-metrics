@@ -12,61 +12,53 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using NUnit.Framework;
+
 using System;
 using Serilog.Events;
 using System.Reactive.Linq;
 using Serilog.Context;
 using System.Collections.Generic;
 using Serilog;
+using Xunit;
 
 namespace SerilogMetrics.Tests
 {
 
-	[TestFixture ()]
-	public class GaugeMeasureTests
-	{
-		LogEvent _eventSeen;
 
-		public GaugeMeasureTests ()
-		{
-			var configuration = new LoggerConfiguration();
-			var logger = configuration
-				.MinimumLevel.Verbose()               // Make sure we see also the lowest level
-				.WriteTo.Observers(events => events   // So we can check the result
-					.Do(evt => { _eventSeen = evt; })
-					.Subscribe())
-				.WriteTo.Console()                    // Still visible in the unit test console
-				.Enrich.FromLogContext()
-				.CreateLogger();
+	public class GaugeMeasureTests : IClassFixture<SerilogFixture>
+    {
 
-			Log.Logger = logger;
-		}
+        SerilogFixture fixture;
 
-		[Test ()]
+        public GaugeMeasureTests(SerilogFixture fixture)
+        {
+            this.fixture = fixture;
+        }
+
+        [Fact]
 		public void GaugeShouldReturnMeasure ()
 		{
 			var queue = new Queue<int>();
-			var gauge = Log.Logger.GaugeOperation("queue", "item(s)", () => queue.Count);
+			var gauge = fixture.Logger.GaugeOperation("queue", "item(s)", () => queue.Count);
 
 			gauge.Write ();
-			Assert.AreEqual ("\"queue\" value = 0 item(s)", _eventSeen.RenderMessage());
+			Assert.Equal ("\"queue\" value = 0 item(s)", fixture.EventSeen.RenderMessage());
 
 			queue.Enqueue (1);
 			queue.Enqueue (1);
 
 			gauge.Write ();
-			Assert.AreEqual ("\"queue\" value = 2 item(s)", _eventSeen.RenderMessage());
+			Assert.Equal ("\"queue\" value = 2 item(s)", fixture.EventSeen.RenderMessage());
 
 			queue.Dequeue ();
 
 			gauge.Write ();
-			Assert.AreEqual ("\"queue\" value = 1 item(s)", _eventSeen.RenderMessage());
+			Assert.Equal ("\"queue\" value = 1 item(s)", fixture.EventSeen.RenderMessage());
 
 			queue.Clear ();
 
 			gauge.Write ();
-			Assert.AreEqual ("\"queue\" value = 0 item(s)", _eventSeen.RenderMessage());
+			Assert.Equal ("\"queue\" value = 0 item(s)", fixture.EventSeen.RenderMessage());
 
 		}
 	}

@@ -3,23 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5A23229C-5FD9-4483-ABC3-AE3A02E6B677}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerilogMetrics", "src\SerilogMetrics\SerilogMetrics.csproj", "{264C91AF-6631-4E04-A2AC-E32E88055228}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{70C58A7D-60CC-4896-96E2-D088E30AA584}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerilogMetrics.Tests", "test\SerilogMetrics.Tests\SerilogMetrics.Tests.csproj", "{2BC62583-75E2-4A1B-B4DA-54F1FEDAE846}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{59B9A86B-47A4-47C8-A766-1AB25D1A4FCB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{59B9A86B-47A4-47C8-A766-1AB25D1A4FCB}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		Build.ps1 = Build.ps1
+		CHANGES.md = CHANGES.md
+		GitVersionConfig.yaml = GitVersionConfig.yaml
 		global.json = global.json
+		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{79007980-CE23-4A4D-9151-D4DDF8ECC12B}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SerilogMetrics", "src\SerilogMetrics\SerilogMetrics.xproj", "{264C91AF-6631-4E04-A2AC-E32E88055228}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerilogMetrics.Samples.Console", "samples\SerilogMetrics.Samples.Console\SerilogMetrics.Samples.Console.csproj", "{9201B67F-FE73-4092-8DB6-1D35219CA3C3}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SerilogMetrics.Tests", "test\SerilogMetrics.Tests\SerilogMetrics.Tests.xproj", "{2BC62583-75E2-4A1B-B4DA-54F1FEDAE846}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SerilogMetrics.Samples.Console", "samples\SerilogMetrics.Samples.Console\SerilogMetrics.Samples.Console.xproj", "{9201B67F-FE73-4092-8DB6-1D35219CA3C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,10 +42,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{264C91AF-6631-4E04-A2AC-E32E88055228} = {5A23229C-5FD9-4483-ABC3-AE3A02E6B677}
-		{2BC62583-75E2-4A1B-B4DA-54F1FEDAE846} = {70C58A7D-60CC-4896-96E2-D088E30AA584}
-		{9201B67F-FE73-4092-8DB6-1D35219CA3C3} = {79007980-CE23-4A4D-9151-D4DDF8ECC12B}
 	EndGlobalSection
 EndGlobal

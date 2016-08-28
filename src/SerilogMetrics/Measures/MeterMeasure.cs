@@ -295,19 +295,19 @@ namespace SerilogMetrics
 
 		public void Set(double value)
 		{
-#if !NETSTANDARD1_1
+#if !DOTNETCORE
 			Thread.VolatileWrite(ref _value, value);
 #else
-			Volatile.Write(ref _value, value);
+            Volatile.Write(ref _value, value);
 #endif
 		}
 
 		public double Get()
 		{
-#if !NETSTANDARD1_1
+#if !DOTNETCORE
 			return Thread.VolatileRead(ref _value);
 #else
-			return Volatile.Read(ref _value);
+            return Volatile.Read(ref _value);
 #endif
 		}
 

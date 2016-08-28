@@ -12,99 +12,92 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using NUnit.Framework;
+
 using System;
 using Serilog.Events;
 using Serilog;
 using System.Reactive.Linq;
+using Xunit;
 
 
 namespace SerilogMetrics.Tests
 {
 
 
-	[TestFixture ()]
-	public class HealthMeasureTests
-	{
-		LogEvent _eventSeen;
+    public class HealthMeasureTests : IClassFixture<SerilogFixture>
+    {
 
-		public HealthMeasureTests ()
-		{
-			var configuration = new LoggerConfiguration();
-			var logger = configuration
-				.MinimumLevel.Verbose()               // Make sure we see also the lowest level
-				.WriteTo.Observers(events => events   // So we can check the result
-					.Do(evt => { _eventSeen = evt; })
-					.Subscribe())
-				.WriteTo.Console()                    // Still visible in the unit test console
-				.CreateLogger();
+        SerilogFixture fixture;
 
-			Log.Logger = logger;
-		}
+        public HealthMeasureTests(SerilogFixture fixture)
+        {
+            this.fixture = fixture;
+        }
 
-		[Test ()]
-		public void HealthyCheckResultShouldReportInformation ()
-		{
-			var check = Log.Logger.HealthCheck ("test-healthy", () => new HealthCheckResult ());
+        [Fact]
+        public void HealthyCheckResultShouldReportInformation()
+        {
+            var check = fixture.Logger.HealthCheck("test-healthy", () => new HealthCheckResult());
 
-			check.Write ();
+            check.Write();
 
-			Assert.AreEqual (_eventSeen.RenderMessage () , "Health check \"test-healthy\" result is \"successful\".");
-			Assert.IsTrue (_eventSeen.Level == LogEventLevel.Information);
-		}
+            Assert.Equal(fixture.EventSeen.RenderMessage(), "Health check \"test-healthy\" result is \"successful\".");
+            Assert.True(fixture.EventSeen.Level == LogEventLevel.Information);
+        }
 
-		[Test ()]
-		public void HealthyCheckWithCustomLevelResultShouldReportCustomLevel()
-		{
-			var check = Log.Logger.HealthCheck ("test-healthy", () => new HealthCheckResult (), LogEventLevel.Verbose);
+        [Fact]
+        public void HealthyCheckWithCustomLevelResultShouldReportCustomLevel()
+        {
+            var check = fixture.Logger.HealthCheck("test-healthy", () => new HealthCheckResult(), LogEventLevel.Verbose);
 
-			check.Write ();
+            check.Write();
 
-			Assert.AreEqual (_eventSeen.RenderMessage () , "Health check \"test-healthy\" result is \"successful\".");
-			Assert.IsTrue (_eventSeen.Level == LogEventLevel.Verbose);
-		}
+            Assert.Equal(fixture.EventSeen.RenderMessage(), "Health check \"test-healthy\" result is \"successful\".");
+            Assert.True(fixture.EventSeen.Level == LogEventLevel.Verbose);
+        }
 
-		[Test ()]
-		public void UnHealthyCheckResultShouldReportWarning ()
-		{
-		
-			var check = Log.Logger.HealthCheck ("test-unhealthy", () => new HealthCheckResult ("something was wrong", new ArgumentException()));
+        [Fact]
+        public void UnHealthyCheckResultShouldReportWarning()
+        {
 
-			check.Write ();
+            var check = fixture.Logger.HealthCheck("test-unhealthy", () => new HealthCheckResult("something was wrong", new ArgumentException()));
 
-			Assert.IsTrue (_eventSeen.RenderMessage () == "Health check \"test-unhealthy\" result is \"something was wrong\".");
-			Assert.IsTrue (_eventSeen.Level == LogEventLevel.Warning);
-		}
+            check.Write();
 
-		[Test ()]
-		public void UnHealthyCheckWithCustomLevelResultShouldReportCustomLevel()
-		{
+            Assert.True(fixture.EventSeen.RenderMessage() == "Health check \"test-unhealthy\" result is \"something was wrong\".");
+            Assert.True(fixture.EventSeen.Level == LogEventLevel.Warning);
+        }
 
-			var check = Log.Logger.HealthCheck ("test-unhealthy", () => new HealthCheckResult ("something was wrong", new ArgumentException()), LogEventLevel.Information, LogEventLevel.Fatal);
+        [Fact]
+        public void UnHealthyCheckWithCustomLevelResultShouldReportCustomLevel()
+        {
 
-			check.Write ();
+            var check = fixture.Logger.HealthCheck("test-unhealthy", () => new HealthCheckResult("something was wrong", new ArgumentException()), LogEventLevel.Information, LogEventLevel.Fatal);
 
-			Assert.IsTrue (_eventSeen.RenderMessage () == "Health check \"test-unhealthy\" result is \"something was wrong\".");
-			Assert.IsTrue (_eventSeen.Level == LogEventLevel.Fatal);
-		}
+            check.Write();
 
-		[Test ()]
-		public void HealthyCheckWithExceptionMustBeCaptured ()
-		{
-		
-			var check = Log.Logger.HealthCheck ("test-exception", () => {
-				// Something goes wrong here
-				throw new ArgumentException();
-			});
+            Assert.True(fixture.EventSeen.RenderMessage() == "Health check \"test-unhealthy\" result is \"something was wrong\".");
+            Assert.True(fixture.EventSeen.Level == LogEventLevel.Fatal);
+        }
 
-			check.Write ();
+        [Fact]
+        public void HealthyCheckWithExceptionMustBeCaptured()
+        {
 
-			Assert.IsTrue (_eventSeen.RenderMessage () == "Health check \"test-exception\" result is \"Unable to execute the health check named 'test-exception'. See inner exception for more details.\".");
-			Assert.NotNull (_eventSeen.Exception);
-			Assert.IsInstanceOf (typeof(ArgumentException), _eventSeen.Exception);
-			Assert.IsTrue (_eventSeen.Level == LogEventLevel.Error);
-		}
+            var check = fixture.Logger.HealthCheck("test-exception", () =>
+            {
+                // Something goes wrong here
+                throw new ArgumentException();
+            });
 
-	}
+            check.Write();
+
+            Assert.True(fixture.EventSeen.RenderMessage() == "Health check \"test-exception\" result is \"Unable to execute the health check named 'test-exception'. See inner exception for more details.\".");
+            Assert.NotNull(fixture.EventSeen.Exception);
+            Assert.IsType(typeof(ArgumentException), fixture.EventSeen.Exception);
+            Assert.True(fixture.EventSeen.Level == LogEventLevel.Error);
+        }
+
+    }
 }
 

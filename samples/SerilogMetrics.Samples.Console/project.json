@@ -1,8 +1,6 @@
 {
   "version": "1.0.0-*",
-  "title": "SerilogMetrics.Tests",
-
-  "testRunner": "xunit",
+  "title": "SerilogMetrics.Samples.Console",
 
   "configurations": {
     "Debug": {
@@ -19,15 +17,8 @@
   },
 
   "dependencies": {
-    "xunit": "2.2.0-beta2-build3300",
-    "dotnet-test-xunit": "2.2.0-preview2-build1029",
-    "xunit.runner.visualstudio": "2.2.0-beta2-build1149",
-    "Rx-Core": "2.2.5",
-    "Rx-Interfaces": "2.2.5",
-    "Rx-Linq": "2.2.5",
-    "Rx-Main": "2.2.5",
-    "Rx-PlatformServices": "2.2.5",
-    "Serilog.Sinks.Console": "2.1.0",
+    "Serilog.Sinks.ColoredConsole": "2.0.0",
+    "Serilog.Sinks.Trace": "2.0.0",
     "Serilog.Sinks.Observable": "2.0.0",
     "SerilogMetrics": { "target": "project" }
   },
@@ -43,5 +34,8 @@
     },
     "net46": {}
 
+  },
+  "buildOptions": {
+    "emitEntryPoint": true
   }
 }

@@ -18,7 +18,6 @@ namespace SerilogMetrics.Samples.Console
 				.WriteTo.ColoredConsole(
 					outputTemplate: "{Timestamp:HH:mm:ss} ({ThreadId}) [{Level}] {Message}{NewLine}{Exception}")
 				.WriteTo.Trace()
-				.Enrich.With(new ThreadIdEnricher(), new MachineNameEnricher())
 				.CreateLogger();
 
 
