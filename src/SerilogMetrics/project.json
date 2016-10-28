@@ -72,8 +72,7 @@
     },
     "net45": {
       "frameworkAssemblies": {
-        "System.Threading": "",
-        "System.Collections.Concurrent": ""
+        "System.Threading": ""
       }
     }
   }
