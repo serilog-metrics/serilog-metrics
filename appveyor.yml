@@ -10,14 +10,14 @@ artifacts:
 deploy:
 - provider: NuGet
   api_key:
-    secure: xoBgXlnyTeh+PMTdVWf6WkqJBwMSTx/5k9gikwuv15S/fiJjlPBfpU4eblJvGMoq
+    secure: 5Hlc5RvaCV0teHvU+L89jVYoAO8I6tanb3Teb9cl/JJ1bUOEz/5P3xt0nnX0Lzx0
   on:
     branch: /^(master|dev)$/
 - provider: GitHub
   auth_token:
     secure: yiUveABinUJiYIbejeka2mPOlrG6vpmNDckhtrl+6C6/+bameXNwBGBUSCZBDRVK
   force_update: true
-  artifact: artifacts/SerilogMetrics*.nupkg
+  artifact: /SerilogMetrics.*\.nupkg/
   tag: v$(appveyor_build_version)
   on:
     branch: master
