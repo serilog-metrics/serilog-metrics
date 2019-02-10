@@ -53,6 +53,33 @@ namespace SerilogMetrics.Tests
         }
 
         [Fact]
+        public void CounterStoresAddValue()
+        {
+            fixture.EventsLogged.Clear();
+
+            var check = fixture.Logger.CountOperation("invocations", "times", false);
+
+            Assert.Equal(check.Value(), 0);
+
+            check.Add(1);
+            Assert.Equal(check.Value(), 1);
+
+            check.Add(-1);
+            Assert.Equal(check.Value(), 0);
+
+            check.Add(10);
+            Assert.Equal(check.Value(), 10);
+
+            check.Add(100);
+            Assert.Equal(check.Value(), 110);
+
+            check.Add(-110);
+            Assert.Equal(check.Value(), 0);
+
+            fixture.EventsLogged.Clear();
+        }
+
+        [Fact]
         public void CounterWritesResult()
         {
             fixture.EventsLogged.Clear();
@@ -127,8 +154,6 @@ namespace SerilogMetrics.Tests
 
             fixture.EventsLogged.Clear();
         }
-
-
     }
 
 }
