@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>Provides utilities to facilitate metrics (timers, counters, gauges, meters, healthchecks) on top of Serilog.</Description>
     <AssemblyTitle>SerilogMetrics</AssemblyTitle>
-    <VersionPrefix>2.0.0</VersionPrefix>
+    <VersionPrefix>2.1.0</VersionPrefix>
     <Authors>SerilogMetrics Contributors</Authors>
     <TargetFrameworks>net45;net46;netstandard1.0;netstandard1.3;netstandard2.0</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
