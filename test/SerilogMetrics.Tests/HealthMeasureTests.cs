@@ -41,7 +41,7 @@ namespace SerilogMetrics.Tests
 
             check.Write();
 
-            Assert.Equal(fixture.EventSeen.RenderMessage(), "Health check \"test-healthy\" result is \"successful\".");
+            Assert.Equal("Health check \"test-healthy\" result is \"successful\".", fixture.EventSeen.RenderMessage());
             Assert.True(fixture.EventSeen.Level == LogEventLevel.Information);
         }
 
@@ -52,7 +52,7 @@ namespace SerilogMetrics.Tests
 
             check.Write();
 
-            Assert.Equal(fixture.EventSeen.RenderMessage(), "Health check \"test-healthy\" result is \"successful\".");
+            Assert.Equal("Health check \"test-healthy\" result is \"successful\".", fixture.EventSeen.RenderMessage());
             Assert.True(fixture.EventSeen.Level == LogEventLevel.Verbose);
         }
 
@@ -94,7 +94,7 @@ namespace SerilogMetrics.Tests
 
             Assert.True(fixture.EventSeen.RenderMessage() == "Health check \"test-exception\" result is \"Unable to execute the health check named 'test-exception'. See inner exception for more details.\".");
             Assert.NotNull(fixture.EventSeen.Exception);
-            Assert.IsType(typeof(ArgumentException), fixture.EventSeen.Exception);
+            Assert.IsType<ArgumentException>(fixture.EventSeen.Exception);
             Assert.True(fixture.EventSeen.Level == LogEventLevel.Error);
         }
 

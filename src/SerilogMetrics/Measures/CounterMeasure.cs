@@ -82,9 +82,23 @@ namespace SerilogMetrics
 
         }
 
-		/// <summary>
-		/// Resets the counter back to zero.
-		/// </summary>
+        /// <summary>
+        /// Adds a value to counter.
+        /// </summary>
+        /// <param name="value">A long value to add to the counter.</param>
+        public virtual void Add(long value)
+        {
+            _value.AddAndGet(value);
+
+            _iterations.Increment();
+
+            if (_directWrite && (_iterations.Get() % _resolution) == 0)
+                Write();
+        }
+
+        /// <summary>
+        /// Resets the counter back to zero.
+        /// </summary>
         public virtual void Reset()
         {
             _value.Set(0);

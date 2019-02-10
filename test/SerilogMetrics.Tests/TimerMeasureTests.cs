@@ -40,7 +40,7 @@ namespace SerilogMetrics.Tests
             Assert.Equal("Beginning operation \"test-id\": \"test\"", fixture.EventSeen.RenderMessage());
 
             check.Dispose();
-            Assert.True(fixture.EventSeen.RenderMessage().StartsWith("Completed operation \"test-id\"", StringComparison.Ordinal));
+            Assert.StartsWith("Completed operation \"test-id\"", fixture.EventSeen.RenderMessage(), StringComparison.Ordinal);
 
         }
 
@@ -57,7 +57,7 @@ namespace SerilogMetrics.Tests
 
             check.Dispose();
 
-            Assert.True(fixture.EventSeen.RenderMessage().Contains("exceeded"));
+            Assert.Contains("exceeded", fixture.EventSeen.RenderMessage());
             Assert.Equal(LogEventLevel.Warning, fixture.EventSeen.Level);
             Assert.True(Convert.ToInt32(fixture.EventSeen.Properties["TimedOperationElapsedInMs"].ToString()) >= 30);
             Assert.True(fixture.EventSeen.Properties.ContainsKey("WarningLimit"));
@@ -75,7 +75,7 @@ namespace SerilogMetrics.Tests
                 Assert.Equal("Beginning operation \"test-id\": \"test\"", fixture.EventSeen.RenderMessage());
 
                 check.Dispose();
-                Assert.True(fixture.EventSeen.RenderMessage().StartsWith("Completed operation \"test-id\"", StringComparison.Ordinal));
+                Assert.StartsWith("Completed operation \"test-id\"", fixture.EventSeen.RenderMessage(), StringComparison.Ordinal);
             }
 
             Assert.True(fixture.EventSeen.Properties.ContainsKey("numberOfOperations"));
