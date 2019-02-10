@@ -43,7 +43,7 @@ namespace SerilogMetrics.Tests
 
             meter.Write();
 
-            Assert.True(fixture.EventSeen.RenderMessage().Contains("\"server load\" count = 1, "));
+            Assert.Contains("\"server load\" count = 1, ", fixture.EventSeen.RenderMessage());
 
 
             System.Threading.Thread.Sleep(2000);
@@ -52,7 +52,7 @@ namespace SerilogMetrics.Tests
 
             meter.Write();
 
-            Assert.True(fixture.EventSeen.RenderMessage().Contains("\"server load\" count = 3, "));
+            Assert.Contains("\"server load\" count = 3, ", fixture.EventSeen.RenderMessage());
 
             //Wait a minute
             System.Threading.Thread.Sleep(60000);
@@ -61,7 +61,7 @@ namespace SerilogMetrics.Tests
 
             meter.Write();
 
-            Assert.True(fixture.EventSeen.RenderMessage().Contains("\"server load\" count = 5, "));
+            Assert.Contains("\"server load\" count = 5, ", fixture.EventSeen.RenderMessage());
 
             Assert.Equal(5, meter.Count);
         }

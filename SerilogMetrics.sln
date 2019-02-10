@@ -9,7 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{59B9A86B
 		appveyor.yml = appveyor.yml
 		Build.ps1 = Build.ps1
 		CHANGES.md = CHANGES.md
-		GitVersionConfig.yaml = GitVersionConfig.yaml
 		global.json = global.json
 		LICENSE = LICENSE
 		README.md = README.md

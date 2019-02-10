@@ -34,19 +34,19 @@ namespace SerilogMetrics.Tests
         {
             var check = fixture.Logger.CountOperation("invocations", "times", false);
 
-            Assert.Equal(check.Value(), 0);
+            Assert.Equal(0, check.Value());
 
             check.Increment();
-            Assert.Equal(check.Value(), 1);
+            Assert.Equal(1, check.Value());
 
             check.Increment();
-            Assert.Equal(check.Value(), 2);
+            Assert.Equal(2, check.Value());
 
             check.Decrement();
-            Assert.Equal(check.Value(), 1);
+            Assert.Equal(1, check.Value());
 
             check.Reset();
-            Assert.Equal(check.Value(), 0);
+            Assert.Equal(0, check.Value());
 
             fixture.EventsLogged.Clear();
 
@@ -59,22 +59,22 @@ namespace SerilogMetrics.Tests
 
             var check = fixture.Logger.CountOperation("invocations", "times", false);
 
-            Assert.Equal(check.Value(), 0);
+            Assert.Equal(0, check.Value());
 
             check.Add(1);
-            Assert.Equal(check.Value(), 1);
+            Assert.Equal(1, check.Value());
 
             check.Add(-1);
-            Assert.Equal(check.Value(), 0);
+            Assert.Equal(0, check.Value());
 
             check.Add(10);
-            Assert.Equal(check.Value(), 10);
+            Assert.Equal(10, check.Value());
 
             check.Add(100);
-            Assert.Equal(check.Value(), 110);
+            Assert.Equal(110, check.Value());
 
             check.Add(-110);
-            Assert.Equal(check.Value(), 0);
+            Assert.Equal(0, check.Value());
 
             fixture.EventsLogged.Clear();
         }
@@ -86,10 +86,10 @@ namespace SerilogMetrics.Tests
 
             var check = fixture.Logger.CountOperation("invocations", "times", false);
 
-            Assert.Equal(check.Value(), 0);
+            Assert.Equal(0, check.Value());
 
             check.Increment();
-            Assert.Equal(check.Value(), 1);
+            Assert.Equal(1, check.Value());
 
             check.Write();
 
