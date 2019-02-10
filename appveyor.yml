@@ -17,7 +17,7 @@ deploy:
   auth_token:
     secure: yiUveABinUJiYIbejeka2mPOlrG6vpmNDckhtrl+6C6/+bameXNwBGBUSCZBDRVK
   force_update: true
-  artifact: artifacts/SerilogMetrics*.nupkg
+  artifact: /SerilogMetrics.*\.nupkg/
   tag: v$(appveyor_build_version)
   on:
     branch: master
