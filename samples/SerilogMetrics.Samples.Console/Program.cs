@@ -67,8 +67,10 @@ namespace SerilogMetrics.Samples.Console
 			counter.Increment();
 			counter.Increment();
 			counter.Decrement();
+            counter.Add(10);
+            counter.Add(-5);
 
-			System.Console.WriteLine("Press a key to exit.");
+            System.Console.WriteLine("Press a key to exit.");
 			System.Console.ReadKey(true);
 		}
 	}

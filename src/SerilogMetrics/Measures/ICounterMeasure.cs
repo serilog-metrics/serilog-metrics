@@ -30,6 +30,12 @@ namespace SerilogMetrics
         void Decrement();
 
         /// <summary>
+        /// Adds a value to counter.
+        /// </summary>
+        /// <param name="value">A long value to add to the counter.</param>
+        void Add(long value);
+
+        /// <summary>
         /// Resets the counter back to zero.
         /// </summary>
         void Reset();
