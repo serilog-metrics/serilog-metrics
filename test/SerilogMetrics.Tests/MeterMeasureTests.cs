@@ -12,11 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using Serilog.Events;
-using System.Reactive.Linq;
-using Serilog.Context;
-using System.Collections.Generic;
 using Serilog;
 using Xunit;
 

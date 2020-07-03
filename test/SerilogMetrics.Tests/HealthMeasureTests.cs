@@ -14,9 +14,8 @@
 
 
 using System;
-using Serilog.Events;
 using Serilog;
-using System.Reactive.Linq;
+using Serilog.Events;
 using Xunit;
 
 

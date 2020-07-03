@@ -13,10 +13,6 @@
 // limitations under the License.
 
 
-using System;
-using Serilog.Events;
-using System.Reactive.Linq;
-using Serilog.Context;
 using System.Collections.Generic;
 using Serilog;
 using Xunit;
@@ -25,7 +21,7 @@ namespace SerilogMetrics.Tests
 {
 
 
-	public class GaugeMeasureTests : IClassFixture<SerilogFixture>
+    public class GaugeMeasureTests : IClassFixture<SerilogFixture>
     {
 
         SerilogFixture fixture;

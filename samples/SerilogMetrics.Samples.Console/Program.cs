@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Serilog;
-using Serilog.Enrichers;
 using Serilog.Events;
 
 namespace SerilogMetrics.Samples.Console
