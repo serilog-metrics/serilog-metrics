@@ -13,10 +13,9 @@
 // limitations under the License.
 
 using System;
-using Serilog.Events;
-using System.Reactive.Linq;
-using Serilog.Context;
 using Serilog;
+using Serilog.Context;
+using Serilog.Events;
 using Xunit;
 
 namespace SerilogMetrics.Tests
